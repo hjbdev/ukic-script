@@ -9,7 +9,7 @@ let currentPlayer;
 let obsConnected = false;
 
 const obs = new OBSWebSocket();
-obs.connect().then(() => {
+obs.connect('localhost:4455', process.env.WS_PASS ?? null).then(() => {
     console.log('Connected to OBS WebSocket');
     obsConnected = true;
 }).catch(err => {
