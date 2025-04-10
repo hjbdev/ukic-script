@@ -9,7 +9,7 @@ let currentPlayer;
 let obsConnected = false;
 
 const obs = new OBSWebSocket();
-obs.connect('localhost:4455', process.env.WS_PASS ?? null).then(() => {
+obs.connect('ws://localhost:4455', process.env.WS_PASS ?? null).then(() => {
     console.log('Connected to OBS WebSocket');
     obsConnected = true;
 }).catch(err => {
@@ -21,8 +21,8 @@ function handleGamestate(data) {
         return;
     }
 
-    if (currentPlayer !== steamId) {
-        currentPlayer = steamId;
+    if (currentPlayer !== data.player?.steamid) {
+        currentPlayer = data.player?.steamid;
         obs.send('SetCurrentScene', { 'scene-name': data.player.steamid });
     }
 }
