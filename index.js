@@ -23,7 +23,7 @@ function handleGamestate(data) {
 
     if (currentPlayer !== data.player?.steamid) {
         currentPlayer = data.player?.steamid;
-        obs.send('SetCurrentScene', { 'scene-name': data.player.steamid });
+        obs.call('SetCurrentScene', { 'scene-name': data.player.steamid });
     }
 }
 
